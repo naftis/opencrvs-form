@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "echo 'Installing @opencrvs/components' && cd node_modules/@opencrvs/components && rm -rf **/*.stories.tsx && npm run build && cd ../../.. && npm install styled-components@^5.2"
   },
   "dependencies": {
-    "@opencrvs/components": "https://gitpkg.vercel.app/opencrvs/opencrvs-core/packages/components?develop",
+    "@opencrvs/components": "https://gitpkg.vercel.app/opencrvs/opencrvs-core/packages/components?fix-components-build",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^5.3.11",

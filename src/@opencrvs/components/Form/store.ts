@@ -35,7 +35,7 @@ export const useField = (id: string) => {
 
   const setValue = (value: string) => setField(id, value);
 
-  return [value, setValue] as const;
+  return [value, setValue, { touched: value !== undefined }] as const;
 };
 
 export const useSetInitialDraft = (initialDraft?: Draft) => {

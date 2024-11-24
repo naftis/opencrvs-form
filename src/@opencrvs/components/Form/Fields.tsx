@@ -8,23 +8,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import {
   BulletList,
-  Button,
   DateField,
   InputField,
   TextInput,
 } from "@opencrvs/components";
-import { useField } from "./store";
+import { useField } from "./useState";
 
 export const BULLET_LIST = ({ id, items }: { id: string; items: string[] }) => {
   return <BulletList id={id} items={items} font="reg16" />;
-};
-
-export const BUTTON = ({ id, label }: { id: string; label: string }) => {
-  return (
-    <Button id={id} type="primary">
-      {label}
-    </Button>
-  );
 };
 
 export const TEXT = ({
@@ -41,7 +32,18 @@ export const TEXT = ({
 }) => {
   const [value = "", setValue] = useField(id);
 
-  const error = value.length > 5;
+  const validations = [
+    {
+      error: "Text is over 5 characters",
+      validate: () => value.length > 5,
+    },
+    {
+      error: "Text is empty",
+      validate: () => value.length === 0,
+    },
+  ];
+
+  const error = validations.find((v) => v.validate())?.error;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -53,13 +55,14 @@ export const TEXT = ({
       id={id}
       touched={true}
       required={required}
-      error={error ? "error" : undefined}
+      error={error}
     >
       <TextInput
         type="text"
         maxLength={maxLength}
+        touched={true}
         value={value}
-        error={error}
+        error={Boolean(error)}
         onChange={onChange}
       />
     </InputField>

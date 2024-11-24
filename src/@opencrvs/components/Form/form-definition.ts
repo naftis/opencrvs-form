@@ -1,4 +1,4 @@
-import type * as Components from "./Components";
+import type * as Fields from "./Fields";
 
 /** @example `{ 'mother.firstname': string, 'mother.lastname': string }` */
 export type Draft = {
@@ -6,29 +6,25 @@ export type Draft = {
 };
 
 /** @example TEXT, BUTTON, BULLET_LIST */
-type ComponentType = keyof typeof Components;
+export type FieldType = keyof typeof Fields;
 
 /** @example `{ id: string, label: string }` */
-type ComponentProps<T extends ComponentType> = React.ComponentProps<
-  (typeof Components)[T]
+export type FieldProps<T extends FieldType> = React.ComponentProps<
+  (typeof Fields)[T]
 >;
 
-type SpecificField<T extends ComponentType> = {
+export type Field<T extends FieldType = FieldType> = {
   id: string;
   type: T;
-} & ComponentProps<T>;
+} & FieldProps<T>;
 
-export type Field = {
-  [K in ComponentType]: SpecificField<K>;
-}[ComponentType];
-
-export type Page = {
+type Page<T extends FieldType> = {
   title: string;
-  fields: Array<Field>;
+  fields: Array<Field<T>>;
 };
 
-export type Form = {
+export type Form<T extends FieldType> = {
   version: string;
   title: string;
-  pages: Array<Page>;
+  pages: Array<Page<T>>;
 };

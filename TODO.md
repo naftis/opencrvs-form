@@ -3,6 +3,7 @@
 - [ ] Publish @opencrvs/components to remove the tasks.json workaround
 - [ ] Make styled-components a peer dependency
 - [ ] DateField has this bug where draft is '--' when the amounts are empty
+- [ ] Scope the draft store to the form https://tkdodo.eu/blog/zustand-and-react-context
 
 ### Ask if user wants to leave?
 

@@ -1,5 +1,5 @@
 import { Button, Content, Frame, Icon } from "@opencrvs/components";
-import * as Components from "./Components";
+import * as Components from "./Fields";
 
 import type { Field } from "./form-definition";
 
